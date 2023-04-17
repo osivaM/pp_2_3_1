@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+    <table border="1">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Age</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="users: ${value}">
+            <td th:text="${users.id}"/>
+            <td th:text="${users.name}"/>
+            <td th:text="${users.lastName}"/>
+            <td th:text="${users.age}"/>
+            <td>
+                <a th:href="@{/update/{id}(id=${users.id})}">Update</a>
+            </td>
+            <td>
+                <form th:method="DELETE" th:action="@{/{id}(id=${users.id})}">
+                    <input type="submit" value="Delete"/>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
+    <form th:method="POST" th:action="@{/}" th:object="${user}">
+        <div>
+            <label for="name">Name     :</label>
+            <input type="text" th:field="*{name}" id="name"/>
+            <label for="lastName">Last Name:</label>
+            <input type="text" th:field="*{lastName}" id="lastName">
+            <label for="age">Age      :</label>
+            <input type="number" th:field="*{age}" id="age">
+            <input type="submit" value="Create user"/>
+        </div>
+    </form>
+    <br/>
+
+</body>
+</html>
