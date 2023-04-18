@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
 
 import java.util.List;
@@ -31,20 +30,17 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    @Transactional
     public void createUser(User user) {
         entityManager.persist(user);
     }
 
     @Override
-    @Transactional
     public void deleteUser(Long id) {
         User user = entityManager.find(User.class, id);
         entityManager.remove(user);
     }
 
     @Override
-    @Transactional
     public void updateUser(Long id, User user) {
         entityManager.merge(user);
     }
